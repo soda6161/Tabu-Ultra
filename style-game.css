@@ -1,0 +1,115 @@
+:root { --glass: rgba(255,255,255,0); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body, html { width: 100%; height: 100%; overflow: hidden; background: #000; display: flex; justify-content: center; font-family: system-ui, sans-serif; }
+
+#app { position: relative; width: 100vw; height: 100vh; max-width: 500px; overflow: hidden; }
+
+.screen { 
+    position: absolute; width: 100%; height: 100%; background-size: cover; background-position: center; 
+    display: none; color: white; 
+}
+.active { display: block; }
+
+/* GÖRSELLER */
+#screen-login { background-image: url('bg-login.png'); }
+#screen-lobby { background-image: url('bg-lobby.png'); }
+.narrator-blue { background-image: url('bg-narrator-a.png'); }
+.narrator-red { background-image: url('bg-narrator-b.png'); }
+.listener-blue { background-image: url('bg-listener-a.png'); }
+.listener-red { background-image: url('bg-listener-b.png'); }
+
+/* LOGIN */
+#login-name-input {
+    position: absolute; top: 68%; left: 12%; width: 76%; height: 8%; 
+    background: rgba(255,255,255,0.95); border: none; border-radius: 9999px; 
+    text-align: center; font-size: 1.5rem; font-weight: bold; color: #222; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.action-buttons {
+    position: absolute; top: 80%; left: 12%; width: 76%; display: flex; flex-direction: column; gap: 14px; align-items: center;
+}
+.big-btn {
+    width: 100%; height: 62px; background: #fff; color: #222; border-radius: 9999px; 
+    display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: bold;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4); cursor: pointer;
+}
+.big-btn.secondary { background: rgba(255,255,255,0.25); color: white; }
+.divider { font-size: 1.1rem; margin: 8px 0; opacity: 0.8; }
+
+/* LOBBY */
+#room-info {
+    position: absolute; top: 6%; left: 0; width: 100%; text-align: center; font-size: 2rem; 
+    font-weight: bold; text-shadow: 0 4px 15px rgba(0,0,0,0.6); cursor: pointer; z-index: 10;
+}
+
+.teams-container {
+    position: absolute; top: 22%; left: 5%; width: 90%; height: 55%; display: flex; gap: 12px;
+}
+.team-panel {
+    flex: 1; border-radius: 24px; padding: 18px 14px; background: rgba(0,0,0,0.4); 
+    display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.red { border: 5px solid #ff3333; }
+.blue { border: 5px solid #3388ff; }
+
+.team-header {
+    text-align: center; font-size: 1.4rem; font-weight: bold; letter-spacing: 2px;
+}
+.role-section { flex: 1; }
+.role-label {
+    font-size: 1.1rem; font-weight: bold; margin-bottom: 8px; text-align: center; opacity: 0.9;
+}
+.players-list {
+    background: rgba(255,255,255,0.15); border-radius: 16px; padding: 12px; min-height: 80px;
+    display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start;
+}
+.players-list span {
+    background: rgba(255,255,255,0.9); color: #222; padding: 6px 14px; border-radius: 9999px;
+    font-size: 1.05rem; font-weight: bold; white-space: nowrap;
+}
+
+#btn-start-game {
+    position: absolute; bottom: 8%; left: 12%; width: 76%; height: 8%; background: rgba(255,255,255,0.9);
+    color: #222; border-radius: 9999px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; font-weight: bold; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* OYUN EKRANI */
+#game-stats {
+    position: absolute; top: 5%; left: 5%; right: 5%; display: flex; justify-content: space-between;
+    font-size: 1.6rem; font-weight: bold; text-shadow: 0 4px 12px #000; z-index: 20;
+}
+
+#word-card {
+    position: absolute; top: 18%; left: 8%; width: 84%; height: 52%; 
+    background: rgba(255,255,255,0.95); border-radius: 28px; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 30px 20px; text-align: center; color: #222;
+}
+#word-main { font-size: 2.9rem; font-weight: 900; margin-bottom: 22px; }
+#word-forbidden { font-size: 1.45rem; line-height: 1.75; }
+
+.controls {
+    position: absolute; bottom: 6%; left: 5%; width: 90%; display: none; gap: 12px; z-index: 30;
+}
+#narrator-controls { display: flex; }
+#listener-controls { flex-direction: column; align-items: center; gap: 12px; }
+
+.game-btn {
+    flex: 1; height: 68px; border-radius: 9999px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.35rem; font-weight: bold; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+.tabu { background: #ff3333; color: white; }
+.pass { background: #ffaa00; color: white; }
+.correct { background: #00cc44; color: white; }
+.send { background: #222; color: white; width: 48%; height: 58px; }
+
+#guess-input {
+    width: 82%; height: 58px; background: white; border: none; border-radius: 9999px;
+    text-align: center; font-size: 1.4rem; color: #222; box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+#flash-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; 
+    display: none; z-index: 1000; 
+}
