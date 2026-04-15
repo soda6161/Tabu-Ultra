@@ -108,10 +108,10 @@ const ENGINE = {
         });
 
         // Baloncuklu gösterim
-        document.getElementById('slot-red-narrator').innerHTML = redNarr.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Boş</span>';
-        document.getElementById('slot-red-guesser').innerHTML = redGuess.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Boş</span>';
-        document.getElementById('slot-blue-narrator').innerHTML = blueNarr.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Boş</span>';
-        document.getElementById('slot-blue-guesser').innerHTML = blueGuess.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Boş</span>';
+        document.getElementById('slot-red-narrator').innerHTML = redNarr.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
+        document.getElementById('slot-red-guesser').innerHTML = redGuess.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
+        document.getElementById('slot-blue-narrator').innerHTML = blueNarr.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
+        document.getElementById('slot-blue-guesser').innerHTML = blueGuess.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
 
         this.checkStartButton();
     },
@@ -134,7 +134,6 @@ const ENGINE = {
             }
         });
 
-        // Sınırlar: Anlatıcı max 1, Dinleyici max 7 her takım için
         const canStart = 
             (redNarr >= 1 && redNarr <= 1 && redGuess >= 1 && redGuess <= 7) ||
             (blueNarr >= 1 && blueNarr <= 1 && blueGuess >= 1 && blueGuess <= 7);
