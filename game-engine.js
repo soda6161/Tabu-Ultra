@@ -78,101 +78,6 @@ const ENGINE = {
         { m: "KOLTUK", f: ["Oturmak", "Salon", "Takım", "Yumuşak", "Kanepe"] },
         { m: "YATAK", f: ["Uyku", "Gece", "Yastık", "Yorgan", "Dinlenmek"] },
         { m: "YORGAN", f: ["Uyku", "Örtmek", "Sıcak", "Yatak", "Kış"] },
-        { m: "DOLAP", f: ["Eşya", "Kıyafet", "Mutfak", "Raf", "Kapak"] },
-        { m: "HAVLU", f: ["Banyo", "Islak", "Kurulanmak", "Su", "Pamuk"] },
-        { m: "KAHVE", f: ["Fincan", "Sıcak", "Kafein", "Şeker", "Çay"] },
-        { m: "ŞEKERLEME", f: ["Tatlı", "Çocuk", "Bayram", "Renkli", "Çikolata"] },
-        { m: "KALEMTRAŞ", f: ["Kalem", "Açmak", "Çöp", "Uç", "Kırtasiye"] },
-        { m: "SÖZLÜK", f: ["Kelime", "Anlam", "Dil", "Alfabe", "Kitap"] },
-        { m: "KÜREK", f: ["Toprak", "Bahçe", "Kazmak", "Sap", "İnşaat"] },
-        { m: "MAKAS", f: ["Kesmek", "Kağıt", "El işi", "Berber", "Keskin"] },
-        { m: "MANGAL", f: ["Et", "Ateş", "Kömür", "Piknik", "Tavuk"] },
-        { m: "PAZAR", f: ["Meyve", "Sebze", "Alışveriş", "Tezgah", "Ucuz"] },
-        { m: "SÜPÜRGE", f: ["Temizlik", "Toz", "Yer", "Elektrikli", "Çöp"] },
-        { m: "VALİZ", f: ["Yolculuk", "Eşya", "Bavul", "Tekerlek", "Tatil"] },
-        { m: "DUVAR", f: ["Bina", "Tuğla", "Boya", "Çerçeve", "Oda"] },
-        { m: "MERDİVEN", f: ["Basamak", "Çıkmak", "İnmek", "Kat", "Yüksek"] },
-        { m: "KAPI", f: ["Anahtar", "Kilit", "Giriş", "Kol", "Oda"] },
-        { m: "PENCERE", f: ["Cam", "Dışarı", "Perde", "Manzara", "Hava"] },
-        { m: "ÇATAL", f: ["Kaşık", "Bıçak", "Yemek", "Sofra", "Metal"] },
-        { m: "CİPS", f: ["Patates", "Paket", "Atıştırmalık", "Yağlı", "Tuzlu"] },
-        { m: "ÇAYDANLIK", f: ["Çay", "Demlemek", "Su", "Kaynamak", "Sıcak"] },
-        { m: "TERLİK", f: ["Ayak", "Ev", "Ayakkabı", "Yumuşak", "Taban"] },
-        { m: "KEMER", f: ["Pantolon", "Bel", "Toka", "Sıkmak", "Deri"] },
-        { m: "ÇANTA", f: ["Sırt", "Eşya", "Taşımak", "Okul", "Fermuar"] },
-        { m: "SABUN", f: ["El", "Yıkamak", "Köpük", "Temizlik", "Banyo"] },
-        { m: "ŞAMPUAN", f: ["Saç", "Duş", "Köpük", "Yıkamak", "Banyo"] },
-        { m: "TAVA", f: ["Yumurta", "Pişirmek", "Mutfak", "Yağ", "Sap"] },
-        { m: "ÜTÜ", f: ["Kıyafet", "Kırışık", "Sıcak", "Buhar", "Masa"] },
-        { m: "PERDE", f: ["Pencere", "Güneş", "Korniş", "Tül", "Oda"] },
-        { m: "HALI", f: ["Yer", "Kilim", "Yumuşak", "Oda", "Dokuma"] },
-        { m: "LAMBA", f: ["Işık", "Gece", "Aydınlık", "Ampul", "Elektrik"] },
-        { m: "MASA", f: ["Sandalye", "Üst", "Yemek", "Ayak", "Mobilya"] },
-        { m: "KOLTUK", f: ["Oturmak", "Salon", "Takım", "Yumuşak", "Kanepe"] },
-        { m: "YATAK", f: ["Uyku", "Gece", "Yastık", "Yorgan", "Dinlenmek"] },
-        { m: "YORGAN", f: ["Uyku", "Örtmek", "Sıcak", "Yatak", "Kış"] },
-        { m: "DOLAP", f: ["Eşya", "Kıyafet", "Mutfak", "Raf", "Kapak"] },
-        { m: "KUMBARA", f: ["Para", "Biriktirmek", "Bozuk", "Kutu", "Tasarruf"] },
-        { m: "KALEMTRAŞ", f: ["Kalem", "Açmak", "Çöp", "Uç", "Kırtasiye"] },
-        { m: "SÖZLÜK", f: ["Kelime", "Anlam", "Dil", "Alfabe", "Kitap"] },
-        { m: "KÜREK", f: ["Toprak", "Bahçe", "Kazmak", "Sap", "İnşaat"] },
-        { m: "MAKAS", f: ["Kesmek", "Kağıt", "El işi", "Berber", "Keskin"] },
-        { m: "MANGAL", f: ["Et", "Ateş", "Kömür", "Piknik", "Tavuk"] },
-        { m: "PAZAR", f: ["Meyve", "Sebze", "Alışveriş", "Tezgah", "Ucuz"] },
-        { m: "SÜPÜRGE", f: ["Temizlik", "Toz", "Yer", "Elektrikli", "Çöp"] },
-        { m: "VALİZ", f: ["Yolculuk", "Eşya", "Bavul", "Tekerlek", "Tatil"] },
-        { m: "DUVAR", f: ["Bina", "Tuğla", "Boya", "Çerçeve", "Oda"] },
-        { m: "MERDİVEN", f: ["Basamak", "Çıkmak", "İnmek", "Kat", "Yüksek"] },
-        { m: "KAPI", f: ["Anahtar", "Kilit", "Giriş", "Kol", "Oda"] },
-        { m: "PENCERE", f: ["Cam", "Dışarı", "Perde", "Manzara", "Hava"] },
-        { m: "ÇATAL", f: ["Kaşık", "Bıçak", "Yemek", "Sofra", "Metal"] },
-        { m: "CİPS", f: ["Patates", "Paket", "Atıştırmalık", "Yağlı", "Tuzlu"] },
-        { m: "ÇAYDANLIK", f: ["Çay", "Demlemek", "Su", "Kaynamak", "Sıcak"] },
-        { m: "TERLİK", f: ["Ayak", "Ev", "Ayakkabı", "Yumuşak", "Taban"] },
-        { m: "KEMER", f: ["Pantolon", "Bel", "Toka", "Sıkmak", "Deri"] },
-        { m: "ÇANTA", f: ["Sırt", "Eşya", "Taşımak", "Okul", "Fermuar"] },
-        { m: "SABUN", f: ["El", "Yıkamak", "Köpük", "Temizlik", "Banyo"] },
-        { m: "ŞAMPUAN", f: ["Saç", "Duş", "Köpük", "Yıkamak", "Banyo"] },
-        { m: "TAVA", f: ["Yumurta", "Pişirmek", "Mutfak", "Yağ", "Sap"] },
-        { m: "ÜTÜ", f: ["Kıyafet", "Kırışık", "Sıcak", "Buhar", "Masa"] },
-        { m: "PERDE", f: ["Pencere", "Güneş", "Korniş", "Tül", "Oda"] },
-        { m: "HALI", f: ["Yer", "Kilim", "Yumuşak", "Oda", "Dokuma"] },
-        { m: "LAMBA", f: ["Işık", "Gece", "Aydınlık", "Ampul", "Elektrik"] },
-        { m: "MASA", f: ["Sandalye", "Üst", "Yemek", "Ayak", "Mobilya"] },
-        { m: "KOLTUK", f: ["Oturmak", "Salon", "Takım", "Yumuşak", "Kanepe"] },
-        { m: "YATAK", f: ["Uyku", "Gece", "Yastık", "Yorgan", "Dinlenmek"] },
-        { m: "YORGAN", f: ["Uyku", "Örtmek", "Sıcak", "Yatak", "Kış"] },
-        { m: "DOLAP", f: ["Eşya", "Kıyafet", "Mutfak", "Raf", "Kapak"] },
-        { m: "KUMBARA", f: ["Para", "Biriktirmek", "Bozuk", "Kutu", "Tasarruf"] },
-        { m: "KALEMTRAŞ", f: ["Kalem", "Açmak", "Çöp", "Uç", "Kırtasiye"] },
-        { m: "SÖZLÜK", f: ["Kelime", "Anlam", "Dil", "Alfabe", "Kitap"] },
-        { m: "KÜREK", f: ["Toprak", "Bahçe", "Kazmak", "Sap", "İnşaat"] },
-        { m: "MAKAS", f: ["Kesmek", "Kağıt", "El işi", "Berber", "Keskin"] },
-        { m: "MANGAL", f: ["Et", "Ateş", "Kömür", "Piknik", "Tavuk"] },
-        { m: "PAZAR", f: ["Meyve", "Sebze", "Alışveriş", "Tezgah", "Ucuz"] },
-        { m: "SÜPÜRGE", f: ["Temizlik", "Toz", "Yer", "Elektrikli", "Çöp"] },
-        { m: "VALİZ", f: ["Yolculuk", "Eşya", "Bavul", "Tekerlek", "Tatil"] },
-        { m: "DUVAR", f: ["Bina", "Tuğla", "Boya", "Çerçeve", "Oda"] },
-        { m: "MERDİVEN", f: ["Basamak", "Çıkmak", "İnmek", "Kat", "Yüksek"] },
-        { m: "KAPI", f: ["Anahtar", "Kilit", "Giriş", "Kol", "Oda"] },
-        { m: "PENCERE", f: ["Cam", "Dışarı", "Perde", "Manzara", "Hava"] },
-        { m: "ÇATAL", f: ["Kaşık", "Bıçak", "Yemek", "Sofra", "Metal"] },
-        { m: "CİPS", f: ["Patates", "Paket", "Atıştırmalık", "Yağlı", "Tuzlu"] },
-        { m: "ÇAYDANLIK", f: ["Çay", "Demlemek", "Su", "Kaynamak", "Sıcak"] },
-        { m: "TERLİK", f: ["Ayak", "Ev", "Ayakkabı", "Yumuşak", "Taban"] },
-        { m: "KEMER", f: ["Pantolon", "Bel", "Toka", "Sıkmak", "Deri"] },
-        { m: "ÇANTA", f: ["Sırt", "Eşya", "Taşımak", "Okul", "Fermuar"] },
-        { m: "SABUN", f: ["El", "Yıkamak", "Köpük", "Temizlik", "Banyo"] },
-        { m: "ŞAMPUAN", f: ["Saç", "Duş", "Köpük", "Yıkamak", "Banyo"] },
-        { m: "TAVA", f: ["Yumurta", "Pişirmek", "Mutfak", "Yağ", "Sap"] },
-        { m: "ÜTÜ", f: ["Kıyafet", "Kırışık", "Sıcak", "Buhar", "Masa"] },
-        { m: "PERDE", f: ["Pencere", "Güneş", "Korniş", "Tül", "Oda"] },
-        { m: "HALI", f: ["Yer", "Kilim", "Yumuşak", "Oda", "Dokuma"] },
-        { m: "LAMBA", f: ["Işık", "Gece", "Aydınlık", "Ampul", "Elektrik"] },
-        { m: "MASA", f: ["Sandalye", "Üst", "Yemek", "Ayak", "Mobilya"] },
-        { m: "KOLTUK", f: ["Oturmak", "Salon", "Takım", "Yumuşak", "Kanepe"] },
-        { m: "YATAK", f: ["Uyku", "Gece", "Yastık", "Yorgan", "Dinlenmek"] },
-        { m: "YORGAN", f: ["Uyku", "Örtmek", "Sıcak", "Yatak", "Kış"] },
         { m: "DOLAP", f: ["Eşya", "Kıyafet", "Mutfak", "Raf", "Kapak"] }
     ],
 
@@ -202,10 +107,37 @@ const ENGINE = {
             target.push(p.name || "Oyuncu");
         });
 
-        document.getElementById('slot-red-narrator').innerHTML = redNarr.map(n => `<span>${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
-        document.getElementById('slot-red-guesser').innerHTML = redGuess.map(n => `<span>${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
-        document.getElementById('slot-blue-narrator').innerHTML = blueNarr.map(n => `<span>${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
-        document.getElementById('slot-blue-guesser').innerHTML = blueGuess.map(n => `<span>${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
+        // Baloncuklu gösterim
+        document.getElementById('slot-red-narrator').innerHTML = redNarr.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
+        document.getElementById('slot-red-guesser').innerHTML = redGuess.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
+        document.getElementById('slot-blue-narrator').innerHTML = blueNarr.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
+        document.getElementById('slot-blue-guesser').innerHTML = blueGuess.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
+
+        this.checkStartButton();
+    },
+
+    checkStartButton() {
+        const btn = document.getElementById('btn-start-game');
+        if (!this.roomData?.players) {
+            btn.style.opacity = "0.4";
+            btn.style.pointerEvents = "none";
+            return;
+        }
+
+        let redNarr = 0, redGuess = 0, blueNarr = 0, blueGuess = 0;
+
+        Object.values(this.roomData.players).forEach(p => {
+            if (p.team === 'red') {
+                p.role === 'anlatici' ? redNarr++ : redGuess++;
+            } else if (p.team === 'blue') {
+                p.role === 'anlatici' ? blueNarr++ : blueGuess++;
+            }
+        });
+
+        const canStart = (redNarr >= 1 && redGuess >= 1) || (blueNarr >= 1 && blueGuess >= 1);
+
+        btn.style.opacity = canStart ? "1" : "0.4";
+        btn.style.pointerEvents = canStart ? "auto" : "none";
     },
 
     renderGame(me, data) {
