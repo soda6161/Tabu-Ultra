@@ -127,16 +127,20 @@ const ENGINE = {
         let redNarr = 0, redGuess = 0, blueNarr = 0, blueGuess = 0;
 
         Object.values(this.roomData.players).forEach(p => {
+            if (!p.team || !p.role) return;
             if (p.team === 'red') {
-                p.role === 'anlatici' ? redNarr++ : redGuess++;
+                if (p.role === 'anlatici') redNarr++;
+                else redGuess++;
             } else if (p.team === 'blue') {
-                p.role === 'anlatici' ? blueNarr++ : blueGuess++;
+                if (p.role === 'anlatici') blueNarr++;
+                else blueGuess++;
             }
         });
 
-        const canStart = 
-            (redNarr >= 1 && redNarr <= 1 && redGuess >= 1 && redGuess <= 7) ||
-            (blueNarr >= 1 && blueNarr <= 1 && blueGuess >= 1 && blueGuess <= 7);
+        // Her iki takımda da tam olarak 1 anlatıcı ve en az 1 dinleyici olmalı
+        const canStart =
+            redNarr === 1 && redGuess >= 1 &&
+            blueNarr === 1 && blueGuess >= 1;
 
         btn.style.opacity = canStart ? "1" : "0.4";
         btn.style.pointerEvents = canStart ? "auto" : "none";

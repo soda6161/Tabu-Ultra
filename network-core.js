@@ -74,8 +74,8 @@ const NET = {
             console.log("👤 Oyuncu ekleniyor:", this.playerName);
             return this.roomRef.child('players/' + this.myId).update({
                 name: this.playerName,
-                team: 'blue',
-                role: 'anlatici',
+                team: null,
+                role: null,
                 joinedAt: Date.now()
             });
         }).catch(err => {
