@@ -1,4 +1,4 @@
-<!-- LOBBY EKRANI -->
+<!-- LOBBY EKRANI - YENİ GÖRSEL UYUMLU VERSİYON -->
 <div id="screen-lobby" class="screen">
     <div id="room-info" onclick="NET.copyRoomCode()">
         ODA KODU: <span id="room-code-display">-----</span>
@@ -7,42 +7,52 @@
     <div class="teams-container">
         <!-- KIRMIZI TAKIM -->
         <div class="team-panel red">
-            <div class="team-header">KIRMIZI TAKIM</div>
+            <div class="team-header">🔴 KIRMIZI TAKIM</div>
             
             <div class="role-section">
                 <div class="role-label">ANLATICI <span class="max-count">(1/1)</span></div>
                 <button onclick="if(ENGINE.canJoinRole('red','anlatici')) NET.joinRole('red','anlatici'); else alert('Bu rol dolu! (max 1)');" 
-                        class="join-btn narrator-btn">ANLATICI SEÇ</button>
+                        class="join-btn narrator-btn">
+                    🌟 ANLATICIYA KATIL
+                </button>
                 <div id="slot-red-narrator" class="players-list"></div>
             </div>
 
             <div class="role-section">
-                <div class="role-label">DİNLEYİCİ <span class="max-count">(0/1)</span></div>
+                <div class="role-label">DİNLEYİCİ <span class="max-count">(1/1)</span></div>
                 <button onclick="if(ENGINE.canJoinRole('red','dinleyici')) NET.joinRole('red','dinleyici'); else alert('Bu rol dolu! (max 1)');" 
-                        class="join-btn listener-btn">DİNLEYİCİ SEÇ</button>
+                        class="join-btn listener-btn">
+                    👂 DİNLEYİCİYE KATIL
+                </button>
                 <div id="slot-red-guesser" class="players-list"></div>
             </div>
         </div>
 
         <!-- MAVİ TAKIM -->
         <div class="team-panel blue">
-            <div class="team-header">MAVİ TAKIM</div>
+            <div class="team-header">🔵 MAVİ TAKIM</div>
             
             <div class="role-section">
                 <div class="role-label">ANLATICI <span class="max-count">(1/1)</span></div>
                 <button onclick="if(ENGINE.canJoinRole('blue','anlatici')) NET.joinRole('blue','anlatici'); else alert('Bu rol dolu! (max 1)');" 
-                        class="join-btn narrator-btn">ANLATICI SEÇ</button>
+                        class="join-btn narrator-btn">
+                    🌟 ANLATICIYA KATIL
+                </button>
                 <div id="slot-blue-narrator" class="players-list"></div>
             </div>
 
             <div class="role-section">
-                <div class="role-label">DİNLEYİCİ <span class="max-count">(0/1)</span></div>
+                <div class="role-label">DİNLEYİCİ <span class="max-count">(1/1)</span></div>
                 <button onclick="if(ENGINE.canJoinRole('blue','dinleyici')) NET.joinRole('blue','dinleyici'); else alert('Bu rol dolu! (max 1)');" 
-                        class="join-btn listener-btn">DİNLEYİCİ SEÇ</button>
+                        class="join-btn listener-btn">
+                    👂 DİNLEYİCİYE KATIL
+                </button>
                 <div id="slot-blue-guesser" class="players-list"></div>
             </div>
         </div>
     </div>
 
-    <button id="btn-start-game" onclick="ENGINE.startGame()">OYUNU BAŞLAT</button>
+    <button id="btn-start-game" onclick="ENGINE.startGame()">
+        🚀 OYUNU BAŞLAT
+    </button>
 </div>
