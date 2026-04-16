@@ -2,7 +2,7 @@ const ENGINE = {
     roomData: null,
     timerInterval: null,
 
-    words: [
+    words: [ /* aynı kelimeler */ 
         { m: "BUZDOLABI", f: ["Soğuk", "Yemek", "Mutfak", "Beyaz eşya", "Dondurucu"] },
         { m: "AVUKAT", f: ["Mahkeme", "Hakim", "Savunma", "Müvekkil", "Kanun"] },
         { m: "DİŞ FIRÇASI", f: ["Macun", "Ağız", "Temizlik", "Sabah", "Dişçi"] },
@@ -107,7 +107,6 @@ const ENGINE = {
             target.push(p.name || "Oyuncu");
         });
 
-        // Baloncuklu gösterim
         document.getElementById('slot-red-narrator').innerHTML = redNarr.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
         document.getElementById('slot-red-guesser').innerHTML = redGuess.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
         document.getElementById('slot-blue-narrator').innerHTML = blueNarr.map(n => `<span class="player-bubble">${n}</span>`).join('') || '<span style="opacity:0.5">Bekleniyor...</span>';
@@ -127,20 +126,16 @@ const ENGINE = {
         let redNarr = 0, redGuess = 0, blueNarr = 0, blueGuess = 0;
 
         Object.values(this.roomData.players).forEach(p => {
-            if (!p.team || !p.role) return;
             if (p.team === 'red') {
-                if (p.role === 'anlatici') redNarr++;
-                else redGuess++;
+                p.role === 'anlatici' ? redNarr++ : redGuess++;
             } else if (p.team === 'blue') {
-                if (p.role === 'anlatici') blueNarr++;
-                else blueGuess++;
+                p.role === 'anlatici' ? blueNarr++ : blueGuess++;
             }
         });
 
-        // Her iki takımda da tam olarak 1 anlatıcı ve en az 1 dinleyici olmalı
-        const canStart =
-            redNarr === 1 && redGuess >= 1 &&
-            blueNarr === 1 && blueGuess >= 1;
+        const canStart = 
+            (redNarr === 1 && redGuess >= 1 && redGuess <= 7) ||
+            (blueNarr === 1 && blueGuess >= 1 && blueGuess <= 7);
 
         btn.style.opacity = canStart ? "1" : "0.4";
         btn.style.pointerEvents = canStart ? "auto" : "none";
