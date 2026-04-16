@@ -20,22 +20,20 @@ const NET = {
         this.roomCode = params.get('room');
 
         if (this.roomCode) {
-            // Oda kodu URL'den geldi — önce isim ekranında kal, join butonunu düzenle
-            this.showJoinMode(this.roomCode);
+            const savedName = localStorage.getItem('tabu_player_name');
+            if (savedName) {
+                // İsim zaten var (oda kuran kişi veya daha önce oynayan) — direkt bağlan
+                this.playerName = savedName;
+                this._connectToRoom(this.roomCode);
+            } else {
+                // İsim yok — login ekranında kal, UI'yi ayarla
+                document.getElementById('btn-create-room').style.display = 'none';
+                document.getElementById('divider-text').style.display = 'none';
+                document.getElementById('join-code-input').style.display = 'none';
+                document.getElementById('btn-manual-join').textContent = 'ODAYA KATIL';
+            }
         }
-    },
-
-    showJoinMode(code) {
-        // Login ekranı zaten aktif, sadece UI'yi ayarla
-        const createBtn = document.getElementById('btn-create-room');
-        const divider = document.getElementById('divider-text');
-        const codeInput = document.getElementById('join-code-input');
-        const joinBtn = document.getElementById('btn-manual-join');
-
-        if (createBtn) createBtn.style.display = 'none';
-        if (divider) divider.style.display = 'none';
-        if (codeInput) codeInput.style.display = 'none';
-        if (joinBtn) joinBtn.textContent = 'ODAYA KATIL';
+        // roomCode yoksa: normal login ekranı, hiçbir şey yapma
     },
 
     createRoom() {
@@ -45,12 +43,10 @@ const NET = {
             document.getElementById('login-name-input').focus();
             return;
         }
-        this.playerName = name;
         localStorage.setItem('tabu_player_name', name);
-
         const code = Math.random().toString(36).substring(2, 7).toUpperCase();
-        this.roomCode = code;
-        this._initRoom(code);
+        window.location.href = '?room=' + code;
+        // Sayfa yeniden yüklenecek, init() ismi localStorage'dan alıp _connectToRoom çağıracak
     },
 
     manualJoin() {
@@ -60,27 +56,30 @@ const NET = {
             document.getElementById('login-name-input').focus();
             return;
         }
+        localStorage.setItem('tabu_player_name', name);
 
-        let code = this.roomCode || document.getElementById('join-code-input').value.trim().toUpperCase();
+        const code = this.roomCode
+            ? this.roomCode
+            : document.getElementById('join-code-input').value.trim().toUpperCase();
+
         if (!code || code.length !== 5) return alert("5 karakterlik oda kodu girin!");
 
-        this.playerName = name;
-        localStorage.setItem('tabu_player_name', name);
-        this.roomCode = code;
-        this._initRoom(code);
+        if (this.roomCode) {
+            // URL'den geldi, sayfa zaten doğru — direkt bağlan
+            this.playerName = name;
+            this._connectToRoom(code);
+        } else {
+            // Manuel kod — URL'e git, sayfa yenilenecek
+            window.location.href = '?room=' + code;
+        }
     },
 
-    _initRoom(code) {
+    _connectToRoom(code) {
         this.roomRef = this.db.ref('rooms/' + code);
 
         this.roomRef.once('value').then(snap => {
             if (!snap.exists()) {
-                return this.roomRef.set({
-                    status: 'lobby',
-                    scoreRed: 0,
-                    scoreBlue: 0,
-                    players: {}
-                });
+                return this.roomRef.set({ status: 'lobby', scoreRed: 0, scoreBlue: 0, players: {} });
             }
         }).then(() => {
             return this.roomRef.child('players/' + this.myId).update({
@@ -93,16 +92,12 @@ const NET = {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('screen-lobby').classList.add('active');
             document.getElementById('room-code-display').textContent = code;
-            window.history.replaceState({}, '', '?room=' + code);
         }).catch(err => {
-            console.error("Firebase hatasi:", err);
             alert("Firebase hatası: " + err.message);
         });
 
         this.roomRef.on('value', snap => {
-            if (snap.exists()) {
-                ENGINE.update(snap.val());
-            }
+            if (snap.exists()) ENGINE.update(snap.val());
         });
     },
 
