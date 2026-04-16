@@ -1,108 +1,48 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tabu Ultra</title>
-    <link rel="stylesheet" href="style-game.css">
-</head>
-<body>
-<div id="app">
-
-    <!-- LOGIN EKRANI -->
-    <div id="screen-login" class="screen active">
-        <div style="position:absolute; top:68%; left:12%; width:76%; height:8%;">
-            <input id="login-name-input" type="text" placeholder="İSMİNİ YAZ" maxlength="12">
-        </div>
-        
-        <div class="action-buttons">
-            <div onclick="NET.createRoom()" class="big-btn">ODA OLUŞTUR</div>
-            <div class="divider">veya</div>
-            <input id="join-code-input" type="text" maxlength="5" placeholder="KOD GİR (5 HARF)" style="width:100%; height:62px; text-align:center; font-size:1.4rem; border-radius:9999px; border:none; background:rgba(255,255,255,0.95); color:#222;">
-            <div onclick="NET.manualJoin()" class="big-btn secondary">KODLA KATIL</div>
-        </div>
+<!-- LOBBY EKRANI -->
+<div id="screen-lobby" class="screen">
+    <div id="room-info" onclick="NET.copyRoomCode()">
+        ODA KODU: <span id="room-code-display">-----</span>
     </div>
 
-    <!-- LOBBY EKRANI -->
-    <div id="screen-lobby" class="screen">
-        <div id="room-info" onclick="NET.copyRoomCode()">
-            ODA KODU: <span id="room-code-display">-----</span>
-        </div>
-
-        <div class="teams-container">
-            <!-- KIRMIZI TAKIM -->
-            <div class="team-panel red" onclick="if(event.target.tagName!=='BUTTON') NET.joinRole('red', 'anlatici')">
-                <div class="team-header" style="color:#ff3333;">KIRMIZI TAKIM</div>
-                
-                <div class="role-section">
-                    <div class="role-label">ANLATICI (1/1)</div>
-                    <button onclick="NET.joinRole('red', 'anlatici')" class="join-btn">ANLATICI SEÇ</button>
-                    <div id="slot-red-narrator" class="players-list"></div>
-                </div>
-
-                <div class="role-section">
-                    <div class="role-label">DİNLEYİCİ (0/6)</div>
-                    <button onclick="NET.joinRole('red', 'dinleyici')" class="join-btn">DİNLEYİCİ SEÇ</button>
-                    <div id="slot-red-guesser" class="players-list"></div>
-                </div>
+    <div class="teams-container">
+        <!-- KIRMIZI TAKIM -->
+        <div class="team-panel red">
+            <div class="team-header">KIRMIZI TAKIM</div>
+            
+            <div class="role-section">
+                <div class="role-label">ANLATICI <span class="max-count">(1/1)</span></div>
+                <button onclick="if(ENGINE.canJoinRole('red','anlatici')) NET.joinRole('red','anlatici'); else alert('Bu rol dolu! (max 1)');" 
+                        class="join-btn narrator-btn">ANLATICI SEÇ</button>
+                <div id="slot-red-narrator" class="players-list"></div>
             </div>
 
-            <!-- MAVİ TAKIM -->
-            <div class="team-panel blue" onclick="if(event.target.tagName!=='BUTTON') NET.joinRole('blue', 'anlatici')">
-                <div class="team-header" style="color:#3388ff;">MAVİ TAKIM</div>
-                
-                <div class="role-section">
-                    <div class="role-label">ANLATICI (1/1)</div>
-                    <button onclick="NET.joinRole('blue', 'anlatici')" class="join-btn">ANLATICI SEÇ</button>
-                    <div id="slot-blue-narrator" class="players-list"></div>
-                </div>
-
-                <div class="role-section">
-                    <div class="role-label">DİNLEYİCİ (0/6)</div>
-                    <button onclick="NET.joinRole('blue', 'dinleyici')" class="join-btn">DİNLEYİCİ SEÇ</button>
-                    <div id="slot-blue-guesser" class="players-list"></div>
-                </div>
+            <div class="role-section">
+                <div class="role-label">DİNLEYİCİ <span class="max-count">(0/1)</span></div>
+                <button onclick="if(ENGINE.canJoinRole('red','dinleyici')) NET.joinRole('red','dinleyici'); else alert('Bu rol dolu! (max 1)');" 
+                        class="join-btn listener-btn">DİNLEYİCİ SEÇ</button>
+                <div id="slot-red-guesser" class="players-list"></div>
             </div>
         </div>
 
-        <button id="btn-start-game" onclick="ENGINE.startGame()">OYUNU BAŞLAT</button>
+        <!-- MAVİ TAKIM -->
+        <div class="team-panel blue">
+            <div class="team-header">MAVİ TAKIM</div>
+            
+            <div class="role-section">
+                <div class="role-label">ANLATICI <span class="max-count">(1/1)</span></div>
+                <button onclick="if(ENGINE.canJoinRole('blue','anlatici')) NET.joinRole('blue','anlatici'); else alert('Bu rol dolu! (max 1)');" 
+                        class="join-btn narrator-btn">ANLATICI SEÇ</button>
+                <div id="slot-blue-narrator" class="players-list"></div>
+            </div>
+
+            <div class="role-section">
+                <div class="role-label">DİNLEYİCİ <span class="max-count">(0/1)</span></div>
+                <button onclick="if(ENGINE.canJoinRole('blue','dinleyici')) NET.joinRole('blue','dinleyici'); else alert('Bu rol dolu! (max 1)');" 
+                        class="join-btn listener-btn">DİNLEYİCİ SEÇ</button>
+                <div id="slot-blue-guesser" class="players-list"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- OYUN EKRANI -->
-    <div id="screen-game" class="screen">
-        <div id="game-stats">
-            <div>KIRMIZI: <span id="score-red">0</span></div>
-            <div id="timer-display" style="font-size:2rem; font-weight:900;">00:60</div>
-            <div>MAVİ: <span id="score-blue">0</span></div>
-        </div>
-
-        <div id="word-card">
-            <div id="word-main" style="font-size:2.8rem; font-weight:900; margin-bottom:25px;">---</div>
-            <div id="word-forbidden" style="font-size:1.4rem; line-height:1.8;"></div>
-        </div>
-
-        <!-- ANLATICI KONTROLLERİ -->
-        <div id="narrator-controls" class="controls">
-            <button onclick="ENGINE.reportTabu()" class="game-btn tabu">TABU!</button>
-            <button onclick="ENGINE.passCard()" class="game-btn pass">GEÇ</button>
-            <button onclick="ENGINE.reportCorrect()" class="game-btn correct">DOĞRU!</button>
-        </div>
-
-        <!-- DİNLEYİCİ KONTROLLERİ -->
-        <div id="listener-controls" class="controls">
-            <input id="guess-input" type="text" placeholder="TAHMİNİNİ YAZ...">
-            <button onclick="ENGINE.submitGuess()" class="game-btn send">GÖNDER</button>
-        </div>
-
-        <div id="flash-overlay"></div>
-    </div>
-
+    <button id="btn-start-game" onclick="ENGINE.startGame()">OYUNU BAŞLAT</button>
 </div>
-
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-<script src="network-core.js"></script>
-<script src="game-engine.js"></script>
-
-</body>
-</html>

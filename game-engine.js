@@ -214,4 +214,36 @@ const ENGINE = {
         f.style.display = 'block';
         setTimeout(() => f.style.display = 'none', 300);
     }
-};
+};// ... mevcut kodların en altına ekle (ENGINE = { ... } içinde)
+
+canJoinRole(team, role) {
+    if (!this.roomData?.players) return true;
+    let count = 0;
+    Object.values(this.roomData.players).forEach(p => {
+        if (p.team === team && p.role === role) count++;
+    });
+    const max = 1; // hem anlatıcı hem dinleyici için max 1
+    return count < max;
+},
+
+// checkStartButton fonksiyonunu tamamen değiştir:
+checkStartButton() {
+    const btn = document.getElementById('btn-start-game');
+    let redNarr = 0, redGuess = 0, blueNarr = 0, blueGuess = 0;
+
+    Object.values(this.roomData.players || {}).forEach(p => {
+        if (p.team === 'red') {
+            if (p.role === 'anlatici') redNarr++;
+            else if (p.role === 'dinleyici') redGuess++;
+        } else if (p.team === 'blue') {
+            if (p.role === 'anlatici') blueNarr++;
+            else if (p.role === 'dinleyici') blueGuess++;
+        }
+    });
+
+    // 🔥 HER İKİ TAKIMDA DA 1 ANLATICI + 1 DİNLEYİCİ OLMALI
+    const canStart = (redNarr === 1 && redGuess === 1) && (blueNarr === 1 && blueGuess === 1);
+
+    btn.style.opacity = canStart ? "1" : "0.4";
+    btn.style.pointerEvents = canStart ? "auto" : "none";
+},

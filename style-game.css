@@ -128,4 +128,77 @@ body, html {
 #flash-overlay { 
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     pointer-events: none; display: none; z-index: 1000; 
+}/* ====================== YENİ LOBBY DÜZENİ ====================== */
+#room-info {
+    top: 5%;
+    font-size: 2rem;
+    letter-spacing: 6px;
+}
+
+.teams-container {
+    top: 18%;
+    height: 68%;
+    gap: 20px;
+}
+
+.team-panel {
+    padding: 28px 20px;
+    border-radius: 36px;
+}
+
+.role-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.role-label {
+    font-size: 1.45rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.max-count {
+    font-size: 1.1rem;
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+.join-btn {
+    height: 68px;
+    border-radius: 9999px;
+    font-size: 1.65rem;
+    font-weight: 900;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.join-btn:active { transform: scale(0.95); }
+
+.narrator-btn {
+    background: rgba(255,255,255,0.95);
+    color: #222;
+}
+
+.listener-btn {
+    background: rgba(255,255,255,0.25);
+    color: white;
+    backdrop-filter: blur(12px);
+}
+
+/* Takım renklerine göre buton vurgusu */
+.red .narrator-btn { border: 4px solid #ff3333; }
+.blue .narrator-btn { border: 4px solid #3388ff; }
+
+.players-list {
+    min-height: 110px;
+    padding: 18px;
+    background: rgba(255,255,255,0.15);
 }
