@@ -1,115 +1,37 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tabu Ultra</title>
-    <link rel="stylesheet" href="style-game.css">
-</head>
-<body>
-    <div id="app">
-
-        <!-- ====================== LOGIN EKRANI ====================== -->
-        <div id="screen-login" class="screen active">
-            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); text-align:center; width:100%;">
-                <h1 style="font-size:3.5rem; margin-bottom:40px; text-shadow:0 0 30px #00ffff;">TABU ULTRA</h1>
-                <input id="login-name-input" type="text" placeholder="İSMİNİ GİR" maxlength="12">
-                <div class="login-actions">
-                    <div onclick="handleLogin()" class="big-btn primary">OYUNA BAŞLA 🚀</div>
-                </div>
-            </div>
+<div id="app">
+    <div id="screen-login" class="screen active">
+        <input id="login-name-input" type="text" placeholder="KAHRAMANIN ADI?" maxlength="12" style="top: 55%; left: 10%; width: 80%;">
+        
+        <div id="btn-create-room" class="big-btn" onclick="NET.createRoom()" 
+             style="top: 65%; left: 15%; width: 70%; height: 8%; background: linear-gradient(45deg, #6a11cb, #2575fc);">
+             YENİ ODA KUR 🚀
         </div>
 
-        <!-- ====================== LOBBY EKRANI ====================== -->
-        <div id="screen-lobby" class="screen">
-            <div id="room-info" onclick="NET.copyRoomCode()">
-                ODA KODU: <span id="room-code-display">-----</span>
-            </div>
-
-            <div class="teams-container">
-                <!-- KIRMIZI TAKIM -->
-                <div class="team-panel red">
-                    <div class="team-header">🔴 KIRMIZI TAKIM</div>
-                    
-                    <div class="role-section">
-                        <div class="role-label">ANLATICI <span class="max-count">(1/1)</span></div>
-                        <button onclick="if(ENGINE.canJoinRole('red','anlatici')) NET.joinRole('red','anlatici'); else alert('Bu rol dolu!');" 
-                                class="join-btn narrator-btn">🌟 ANLATICIYA KATIL</button>
-                        <div id="slot-red-narrator" class="players-list"></div>
-                    </div>
-
-                    <div class="role-section">
-                        <div class="role-label">DİNLEYİCİ <span class="max-count">(1/1)</span></div>
-                        <button onclick="if(ENGINE.canJoinRole('red','dinleyici')) NET.joinRole('red','dinleyici'); else alert('Bu rol dolu!');" 
-                                class="join-btn listener-btn">👂 DİNLEYİCİYE KATIL</button>
-                        <div id="slot-red-guesser" class="players-list"></div>
-                    </div>
-                </div>
-
-                <!-- MAVİ TAKIM -->
-                <div class="team-panel blue">
-                    <div class="team-header">🔵 MAVİ TAKIM</div>
-                    
-                    <div class="role-section">
-                        <div class="role-label">ANLATICI <span class="max-count">(1/1)</span></div>
-                        <button onclick="if(ENGINE.canJoinRole('blue','anlatici')) NET.joinRole('blue','anlatici'); else alert('Bu rol dolu!');" 
-                                class="join-btn narrator-btn">🌟 ANLATICIYA KATIL</button>
-                        <div id="slot-blue-narrator" class="players-list"></div>
-                    </div>
-
-                    <div class="role-section">
-                        <div class="role-label">DİNLEYİCİ <span class="max-count">(1/1)</span></div>
-                        <button onclick="if(ENGINE.canJoinRole('blue','dinleyici')) NET.joinRole('blue','dinleyici'); else alert('Bu rol dolu!');" 
-                                class="join-btn listener-btn">👂 DİNLEYİCİYE KATIL</button>
-                        <div id="slot-blue-guesser" class="players-list"></div>
-                    </div>
-                </div>
-            </div>
-
-            <button id="btn-start-game" onclick="ENGINE.startGame()">🚀 OYUNU BAŞLAT</button>
+        <div style="position:absolute; top:78%; width:100%; text-align:center; color:rgba(255,255,255,0.6); font-weight:bold;">Veya Arkadaşına Katıl</div>
+        
+        <input id="join-code-input" type="text" placeholder="ODA KODU" maxlength="5" 
+               style="top: 83%; left: 15%; width: 40%; height: 7%; text-transform: uppercase;">
+        
+        <div id="btn-manual-join" class="big-btn" onclick="NET.manualJoin()" 
+             style="top: 83%; left: 60%; width: 25%; height: 7%; background: #27ae60; font-size: 0.8rem;">
+             KATIL
         </div>
-
-        <!-- ====================== OYUN EKRANI (ÇİZİMİNE TAM UYUMLU) ====================== -->
-        <div id="screen-game" class="screen">
-
-            <!-- ÜST BAR -->
-            <div id="game-stats">
-                <div style="display:flex; align-items:center; gap:12px;">
-                    <span id="timer-display" style="font-size:2.4rem; font-weight:900; background:rgba(0,0,0,0.45); padding:8px 22px; border-radius:50px; color:white;">00:60</span>
-                </div>
-                <div id="score-display" style="font-size:2rem; font-weight:900; background:rgba(0,0,0,0.45); padding:10px 26px; border-radius:9999px; color:white;">K: 0 | M: 0</div>
-            </div>
-
-            <!-- ANA KELİME KARTI -->
-            <div id="word-card"></div>
-
-            <!-- FLASH EFEKTİ -->
-            <div id="flash-overlay"></div>
-        </div>
-
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
-    <script src="network-core.js"></script>
-    <script src="game-engine.js"></script>
-    <script>
-        // Basit login fonksiyonu (Firebase bağlantısını buraya ekleyebilirsin)
-        function handleLogin() {
-            const name = document.getElementById('login-name-input').value.trim();
-            if (!name) return alert("Lütfen ismini gir!");
-            
-            NET.playerName = name;
-            NET.myId = "player-" + Date.now();
-            // Örnek oda kodu (gerçekte oda oluşturma / katılma ekranı eklenebilir)
-            NET.joinRoom("TEST123");
-        }
+    <div id="screen-lobby" class="screen">
+        <div id="room-info" onclick="NET.copyRoomCode()">
+            ODA: <span id="room-code-display" style="color:white">-----</span> 📋
+        </div>
 
-        // Sayfa yüklendiğinde
-        window.onload = () => {
-            // Firebase config'in varsa buraya ekle
-            // NET.init(firebase);
-        };
-    </script>
-</body>
-</html>
+        <div class="team-red-box hitbox" onclick="NET.joinRole('red', 'anlatici')" style="top:25%; left:8%; width:40%; height:45%;"></div>
+        <div class="team-blue-box hitbox" onclick="NET.joinRole('blue', 'anlatici')" style="top:25%; left:52%; width:40%; height:45%;"></div>
+
+        <div id="btn-start-game" class="big-btn" onclick="ENGINE.startGame()" 
+             style="bottom: 8%; left: 30%; width: 40%; height: 8%; background: #e67e22; border: 2px solid white; box-shadow: 0 0 20px rgba(230, 126, 34, 0.5);">
+             SAVAŞI BAŞLAT!
+        </div>
+    </div>
+    
+    <div id="screen-game" class="screen">
+        </div>
+</div>

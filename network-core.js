@@ -1,33 +1,29 @@
+/* network-core.js - Update */
 const NET = {
-    db: null, roomRef: null, myId: null, roomCode: null, playerName: "Oyuncu",
-    init() {
-        if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
-        this.db = firebase.database();
-        this.myId = localStorage.getItem('tabu_uid') || Math.random().toString(36).substring(2, 10);
-        localStorage.setItem('tabu_uid', this.myId);
-        
-        const params = new URLSearchParams(window.location.search);
-        this.roomCode = params.get('room');
-        if (this.roomCode) this.joinRoom(this.roomCode);
-    },
+    // ... diğer değişkenler ...
+
     createRoom() {
         const name = document.getElementById('login-name-input').value.trim();
-        if (!name) return alert("İsim yaz!");
+        if (name.length < 2) return alert("Önce karizmatik bir isim yaz!");
+        
         localStorage.setItem('tabu_player_name', name);
         const code = Math.random().toString(36).substring(2, 7).toUpperCase();
-        window.location.href = `?room=${code}`;
+        window.location.search = `?room=${code}`;
     },
-    joinRoom(code) {
-        this.roomCode = code.toUpperCase();
-        this.roomRef = this.db.ref('rooms/' + this.roomCode);
-        this.playerName = localStorage.getItem('tabu_player_name') || "Oyuncu";
-        this.roomRef.on('value', snap => { if (snap.exists()) ENGINE.update(snap.val()); });
-        // Odaya girince otomatik "boş" olarak kaydet
-        this.roomRef.child('players/' + this.myId).update({ name: this.playerName });
+
+    manualJoin() {
+        const name = document.getElementById('login-name-input').value.trim();
+        const code = document.getElementById('join-code-input').value.trim().toUpperCase();
+        
+        if (name.length < 2) return alert("İsim yazmadan nereye?");
+        if (code.length < 5) return alert("Eksik kod yazdın reis.");
+
+        localStorage.setItem('tabu_player_name', name);
+        window.location.search = `?room=${code}`;
     },
-    joinRole(team, role) {
-        if (!this.roomRef) return;
-        this.roomRef.child('players/' + this.myId).update({ team, role });
+
+    copyRoomCode() {
+        navigator.clipboard.writeText(this.roomCode);
+        alert("Kod kopyalandı! Arkadaşlarına Discord'dan yapıştır.");
     }
 };
-NET.init();

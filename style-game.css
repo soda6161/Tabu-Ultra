@@ -1,43 +1,78 @@
-/* style-game.css */
-:root { --glass: rgba(255, 255, 255, 0); }
-* { box-sizing: border-box; margin: 0; padding: 0; user-select: none; }
-body, html { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: sans-serif; }
+/* style-game.css - Modern UI Update */
+:root {
+    --neon-blue: #00d2ff;
+    --neon-purple: #9d50bb;
+    --glass: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
 
-#app { position: relative; width: 100vw; height: 100vh; max-width: 500px; margin: 0 auto; overflow: hidden; }
-.screen { position: absolute; width: 100%; height: 100%; background-size: 100% 100%; display: none; }
-.active { display: block; }
+/* Giriş Alanları Modernize */
+#login-name-input, #join-code-input {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-align: center;
+    color: #2c3e50;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    outline: none;
+}
 
-/* Görsel Bağlantıları */
-#screen-login { background-image: url('bg-login.png'); }
-#screen-lobby { background-image: url('bg-lobby.jpg'); }
-.narrator-blue { background-image: url('bg-narrator-a.png'); }
-.narrator-red { background-image: url('bg-narrator-b.png'); }
-.listener-blue { background-image: url('bg-listener-a.png'); }
-.listener-red { background-image: url('bg-listener-b.png'); }
+#login-name-input:focus, #join-code-input:focus {
+    transform: scale(1.05);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+}
 
-/* Hitboxlar (Mor alanların üzeri) */
-.hitbox { position: absolute; background: var(--glass); cursor: pointer; border: none; }
+/* Modern Buton Efektleri */
+.big-btn {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.2s active;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
 
-/* Giriş Ekranı */
-#login-name-input { position: absolute; top: 72%; left: 12%; width: 76%; height: 7%; background: white; border-radius: 12px; text-align: center; font-size: 1.3rem; font-weight: bold; }
-#btn-create-room { top: 85%; left: 28%; width: 44%; height: 8%; }
+.big-btn:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+}
 
-/* Lobi (Takım Seçme) */
-.team-red-box { top: 28%; left: 8%; width: 40%; height: 40%; }
-.team-blue-box { top: 28%; left: 52%; width: 40%; height: 40%; }
-#btn-start-game { bottom: 8%; left: 35%; width: 30%; height: 8%; }
+.big-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
 
-/* Oyun Ekranı Elemanları */
-#word-card { position: absolute; top: 20%; left: 12%; width: 76%; height: 45%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-#word-main { font-size: 2.8rem; font-weight: 900; color: #2c3e50; }
-#word-forbidden { font-size: 1.4rem; color: #c0392b; text-align: center; margin-top: 15px; }
+/* Lobi Kodu Göstergesi */
+#room-info {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    padding: 10px 25px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    font-weight: bold;
+    color: var(--neon-blue);
+    letter-spacing: 2px;
+    z-index: 100;
+}
 
-/* Sıra Göstergesi (Yukarıdaki Mavi/Kırmızı Şey) */
-#turn-indicator { position: absolute; top: 2%; left: 10%; width: 80%; height: 5%; border-radius: 20px; text-align: center; line-height: 2.5; font-weight: bold; color: white; transition: 0.3s; }
-.turn-red { background: #ff3333; box-shadow: 0 0 15px #ff3333; }
-.turn-blue { background: #3388ff; box-shadow: 0 0 15px #3388ff; }
-
-/* Tahmin Girişi (Sadece sırası gelen dinleyiciye) */
-#guess-area { position: absolute; bottom: 18%; left: 10%; width: 80%; display: none; }
-#guess-input { width: 70%; height: 50px; border-radius: 15px 0 0 15px; border: none; padding: 10px; font-size: 1.1rem; }
-#btn-send-guess { width: 30%; height: 50px; background: #27ae60; color: white; border-radius: 0 15px 15px 0; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; }
+/* Takım Seçme Kutuları - Hover Efekti */
+.team-red-box:hover, .team-blue-box:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 3px solid white;
+    border-radius: 20px;
+}
