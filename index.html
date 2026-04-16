@@ -16,10 +16,10 @@
             <input id="login-name-input" type="text" placeholder="İSMİNİ YAZ" maxlength="15">
             
             <div class="action-buttons">
-                <div class="big-btn" onclick="NET.createRoom()">ODA OLUŞTUR</div>
-                <div class="divider">veya</div>
+                <div id="btn-create-room" class="big-btn" onclick="NET.createRoom()">ODA OLUŞTUR</div>
+                <div id="divider-text" class="divider">veya</div>
                 <input id="join-code-input" type="text" placeholder="ODA KODU (5 karakter)" maxlength="5" style="text-transform:uppercase">
-                <div class="big-btn secondary" onclick="NET.manualJoin()">KOD İLE KATIL</div>
+                <div id="btn-manual-join" class="big-btn secondary" onclick="NET.manualJoin()">KOD İLE KATIL</div>
             </div>
         </div>
 
