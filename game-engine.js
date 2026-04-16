@@ -1,6 +1,6 @@
 const ENGINE = {
     roomData: null,
-    words: [], // Burası otomatik dolacak
+    words: [], // kelimeler.txt'den yüklenecek
 
     async init() {
         await this.loadWords();
@@ -25,32 +25,24 @@ const ENGINE = {
                 }
             });
             if (currentWord) this.words.push({ m: currentWord, f: forbidden });
-            console.log(`${this.words.length} kelime başarıyla yüklendi!`);
         } catch (e) {
-            console.error("Kelimeler yüklenemedi, manuel liste kullanılıyor.");
             this.words = [{ m: "ÖRNEK", f: ["Yasak1", "Yasak2", "Yasak3", "Yasak4", "Yasak5"] }];
         }
     },
 
     update(data) {
         this.roomData = data;
-        if (data.status === 'playing') this.renderGame(data);
-        else this.renderLobby(data);
+        if (data.status === 'playing') {
+            this.renderGame(data);
+        } else {
+            this.renderLobby(data);
+        }
     },
 
     renderLobby(data) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById('screen-lobby').classList.add('active');
         document.getElementById('room-code-display').textContent = NET.roomCode;
-
-        const slots = ['slot-red-narrator', 'slot-red-guesser', 'slot-blue-narrator', 'slot-blue-guesser'];
-        slots.forEach(s => document.getElementById(s).innerHTML = "");
-
-        Object.values(data.players || {}).forEach(p => {
-            const roleKey = p.role === 'anlatici' ? 'narrator' : 'guesser';
-            const el = document.getElementById(`slot-${p.team}-${roleKey}`);
-            if (el) el.innerHTML += `<div class="player-name">${p.name}</div>`;
-        });
     },
 
     startGame() {
@@ -69,28 +61,57 @@ const ENGINE = {
             status: 'playing',
             currentWord: randomWord,
             scoreRed: 0, 
-            scoreBlue: 0,
-            startTime: Date.now()
+            scoreBlue: 0
         });
     },
 
     renderGame(data) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-        document.getElementById('screen-game').classList.add('active');
+        const screen = document.getElementById('screen-game');
+        screen.classList.add('active');
+        
         const me = data.players[NET.myId];
+        const team = me.team === 'blue' ? 'blue' : 'red';
+        const role = me.role === 'anlatici' ? 'narrator' : 'listener';
         
-        const wordMain = document.getElementById('word-main');
-        const wordForbidden = document.getElementById('word-forbidden');
+        // Dinamik Arka Plan Değişimi
+        screen.className = `screen active ${role}-${team}`;
+
+        const isAnlatici = me.role === 'anlatici';
+        document.getElementById('narrator-controls').style.display = isAnlatici ? 'flex' : 'none';
         
-        if (me.role === 'anlatici') {
-            wordMain.textContent = data.currentWord.m;
-            wordForbidden.innerHTML = data.currentWord.f.join('<br>');
-            document.getElementById('narrator-controls').style.display = 'flex';
+        if (isAnlatici) {
+            document.getElementById('word-main').textContent = data.currentWord.m;
+            document.getElementById('word-forbidden').innerHTML = data.currentWord.f.join('<br>');
         } else {
-            wordMain.textContent = "???";
-            wordForbidden.textContent = "ARKADAŞINI DİNLE!";
-            document.getElementById('narrator-controls').style.display = 'none';
+            document.getElementById('word-main').textContent = "???";
+            document.getElementById('word-forbidden').textContent = "ARKADAŞINI DİNLE!";
         }
+    },
+
+    reportCorrect() {
+        const teamKey = this.roomData.players[NET.myId].team === 'blue' ? 'scoreBlue' : 'scoreRed';
+        NET.roomRef.child(teamKey).set((this.roomData[teamKey] || 0) + 1);
+        this.nextWord();
+        this.flash('rgba(0, 255, 0, 0.4)');
+    },
+
+    reportTabu() {
+        const teamKey = this.roomData.players[NET.myId].team === 'blue' ? 'scoreBlue' : 'scoreRed';
+        NET.roomRef.child(teamKey).set((this.roomData[teamKey] || 0) - 1);
+        this.nextWord();
+        this.flash('rgba(255, 0, 0, 0.4)');
+    },
+
+    nextWord() {
+        const word = this.words[Math.floor(Math.random() * this.words.length)];
+        NET.roomRef.update({ currentWord: word });
+    },
+
+    flash(color) {
+        const f = document.getElementById('flash-overlay');
+        f.style.background = color; f.style.display = 'block';
+        setTimeout(() => f.style.display = 'none', 200);
     }
 };
 
